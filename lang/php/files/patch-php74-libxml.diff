@@ -35,6 +35,17 @@ https://github.com/php/php-src/commit/8a95e61   Fix GH-12702: libxml2 2.12.0 iss
  			soap_error2(E_ERROR, "Parsing WSDL: Couldn't load from '%s' : %s", struri, xmlErrorPtr->message);
 --- a/ext/libxml/libxml.c
 +++ b/ext/libxml/libxml.c
+@@ -476,7 +476,7 @@ php_libxml_input_buffer_create_filename(const char *URI, xmlCharEncoding enc)
+ static xmlOutputBufferPtr
+ php_libxml_output_buffer_create_filename(const char *URI,
+                               xmlCharEncodingHandlerPtr encoder,
+-                              int compression ATTRIBUTE_UNUSED)
++                              int compression __attribute__((__unused__)))
+ {
+ 	xmlOutputBufferPtr ret;
+ 	xmlURIPtr puri;
+--- a/ext/libxml/libxml.c
++++ b/ext/libxml/libxml.c
 @@ -530,7 +530,11 @@ static int _php_libxml_free_error(xmlErrorPtr error)
  	return 1;
  }
